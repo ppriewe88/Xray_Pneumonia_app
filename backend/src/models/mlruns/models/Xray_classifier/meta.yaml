@@ -1,8 +1,8 @@
 aliases:
-  baseline: '2'
-  challenger: '3'
+  baseline: '3'
+  challenger: '2'
   champion: '1'
 creation_timestamp: 1743084074209
 description: ''
-last_updated_timestamp: 1744386684549
+last_updated_timestamp: 1744461929148
 name: Xray_classifier
