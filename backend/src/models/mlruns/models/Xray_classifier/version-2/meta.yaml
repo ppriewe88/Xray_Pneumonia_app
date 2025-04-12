@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1743084209706
+current_stage: None
+description: ''
+last_updated_timestamp: 1743084209706
+name: Xray_classifier
+run_id: a2bcc31bd8ee49deb1225ad4cecab7d3
+run_link: ''
+source: mlflow-artifacts:/168696106470894349/a2bcc31bd8ee49deb1225ad4cecab7d3/artifacts/model_artifact
+status: READY
+status_message: null
+storage_location: mlflow-artifacts:/168696106470894349/a2bcc31bd8ee49deb1225ad4cecab7d3/artifacts/model_artifact
+user_id: null
+version: 2

@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/168696106470894349/d5862d0d02ae42f6a5e02dd18b4c842d/artifacts
+end_time: 1742816816183
+entry_point_name: ""
+experiment_id: "168696106470894349"
+lifecycle_stage: active
+run_id: d5862d0d02ae42f6a5e02dd18b4c842d
+run_name: Own CNN
+run_uuid: d5862d0d02ae42f6a5e02dd18b4c842d
+source_name: ""
+source_type: 4
+source_version: ""
+start_time: 1742816805203
+status: 3
+tags: []
+user_id: anandrei90

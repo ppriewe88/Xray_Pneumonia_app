@@ -1,0 +1,7 @@
+# Training and Logging Experiments
+
+This folder serves to unify the training and logging experiments for:
+
+- Own model architectures
+- Transfer learning
+- Fine-tuning of models that were retrieved during transfer learning

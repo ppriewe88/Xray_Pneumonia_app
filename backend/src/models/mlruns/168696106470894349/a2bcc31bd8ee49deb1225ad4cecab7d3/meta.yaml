@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/168696106470894349/a2bcc31bd8ee49deb1225ad4cecab7d3/artifacts
+end_time: 1742816271614
+entry_point_name: ""
+experiment_id: "168696106470894349"
+lifecycle_stage: active
+run_id: a2bcc31bd8ee49deb1225ad4cecab7d3
+run_name: optimized params - finetuning
+run_uuid: a2bcc31bd8ee49deb1225ad4cecab7d3
+source_name: ""
+source_type: 4
+source_version: ""
+start_time: 1742816257147
+status: 3
+tags: []
+user_id: pprie

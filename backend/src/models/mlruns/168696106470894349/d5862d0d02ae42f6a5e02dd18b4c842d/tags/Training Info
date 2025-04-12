@@ -1,0 +1,1 @@
+Self-built CNN with a dropout layer; loss function has been supplemented with class weights.

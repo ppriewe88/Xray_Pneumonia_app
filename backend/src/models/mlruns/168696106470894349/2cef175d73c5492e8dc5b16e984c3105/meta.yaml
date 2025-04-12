@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/168696106470894349/2cef175d73c5492e8dc5b16e984c3105/artifacts
+end_time: 1742824584506
+entry_point_name: ''
+experiment_id: '168696106470894349'
+lifecycle_stage: active
+run_id: 2cef175d73c5492e8dc5b16e984c3105
+run_name: CNN with small dense layer
+run_uuid: 2cef175d73c5492e8dc5b16e984c3105
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742824569609
+status: 3
+tags: []
+user_id: anandrei90
