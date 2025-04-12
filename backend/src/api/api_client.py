@@ -36,7 +36,7 @@ url_with_endpoint = base_url + endpoint
 
 ' ################################ configure nr. of samples to generate #############'
 # samples (prediction runs) to be generated
-n_samples = 4
+n_samples = 200
 
 ' ################################ get images ########################################'
 # Get absolute path of the project dir
