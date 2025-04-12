@@ -7,8 +7,8 @@ __pycache__/
 
 # .gitignore
 
-backend/data/train
-backend/data/test
+backend/src/data/train
+backend/src/data/test
 
 backend/src/models/mlartifacts
 backend/src/models/mlruns
