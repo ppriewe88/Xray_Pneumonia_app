@@ -1,0 +1,14 @@
+**venv/
+**/pneumonia/
+*.pyc
+*.pyo
+*.pyd
+
+**/data/
+
+# ignore local git files
+.git/
+.gitignore
+
+# ignore potential log files
+*.log
