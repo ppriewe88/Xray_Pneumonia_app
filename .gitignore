@@ -10,9 +10,9 @@ __pycache__/
 backend/data/train
 backend/data/test
 
-backend/models/mlartifacts
-backend/models/mlruns
-backend/models/performance_tracking
+backend/src/models/mlartifacts
+backend/src/models/mlruns
+backend/src/models/performance_tracking
 
 *.keras
 

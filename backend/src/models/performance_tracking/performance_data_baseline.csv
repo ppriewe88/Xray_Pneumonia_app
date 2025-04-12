@@ -5,3 +5,4 @@ log_counter,timestamp,y_true,y_pred,accuracy,filename,model_version,model_tag,mo
 4,2025-04-12 12:29:06,0,0.506973922252655,0,NORMAL2-IM-0130-0001.jpeg,2,finetuning,baseline,False
 5,2025-04-12 12:29:12,0,0.9995584487915039,0,NORMAL2-IM-0302-0001.jpeg,2,finetuning,baseline,False
 6,2025-04-12 14:34:13,0,0.9996635913848877,0,IM-0022-0001.jpeg,2,finetuning,baseline,False
+7,2025-04-12 14:36:29,0,0.1462538242340088,1,IM-0089-0001.jpeg,2,finetuning,baseline,False
