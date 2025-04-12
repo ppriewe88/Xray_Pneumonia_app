@@ -1,0 +1,19 @@
+backend/venv/
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# .gitignore
+
+backend/data/train
+backend/data/test
+
+# backend/models/mlartifacts
+# backend/models/mlruns
+# backend/models/performance_tracking
+
+# *.keras
+
+frontend/node_modules
