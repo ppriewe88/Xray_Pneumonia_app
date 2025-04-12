@@ -1,0 +1,6 @@
+log_counter,timestamp,y_true,y_pred,accuracy,filename,model_version,model_tag,model_alias,model_switch
+1,2025-04-12 12:28:38,0,0.6142303943634033,0,IM-0001-0001.jpeg,2,finetuning,baseline,False
+2,2025-04-12 12:28:55,1,0.9116106629371643,1,person101_bacteria_484.jpeg,2,finetuning,baseline,False
+3,2025-04-12 12:29:00,0,0.0098654106259346,1,NORMAL2-IM-0030-0001.jpeg,2,finetuning,baseline,False
+4,2025-04-12 12:29:06,0,0.506973922252655,0,NORMAL2-IM-0130-0001.jpeg,2,finetuning,baseline,False
+5,2025-04-12 12:29:12,0,0.9995584487915039,0,NORMAL2-IM-0302-0001.jpeg,2,finetuning,baseline,False
