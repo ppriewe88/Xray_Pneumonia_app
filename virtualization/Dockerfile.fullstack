@@ -12,7 +12,7 @@ FROM python:3.12-slim AS backend
 WORKDIR /app/backend
 # copy requirements into backend root
 COPY backend/requirements.txt .
-# install requirements with pip
+# install requirements with pip. NOTE: no folders are created!
 RUN pip install --no-cache-dir -r requirements.txt
 # copy backend contents into backend root ("." =  /app/backend).
 # do this selectively, i.e. manually chose folders!
@@ -35,12 +35,12 @@ COPY frontend/package.docker.json ./package.json
 COPY frontend/package-lock.json ./package-lock.json
 COPY frontend/public ./public
 COPY frontend/src ./src
-# install modules
+# install modules. NOTE: creates folder!
 RUN npm install --production
 
 ################################ final stage ##########################
 # use python as base image
-FROM python:3.12-slim
+FROM backend AS final
 # IMPORTANT: set WORKDIR correctly!
 WORKDIR /app
 # install node again
@@ -48,8 +48,11 @@ RUN apt-get update && apt-get install -y curl \
     && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/*
-# copy backend and frontend
+# copy backend. Note: NO python modules are copied! run pip again later with requirements!
 COPY --from=backend /app/backend /app/backend
+# reinstalling backend dependencies (dependendcies in requirements.txt from backend stage)
+RUN pip install --no-cache-dir -r /app/backend/requirements.txt
+# copy frontend. Note: This DOES copy node modules (folder structure from frontend stage!)
 COPY --from=frontend /app/frontend /app/frontend
 # copy start script from "virtualization" to parent directory of frontend (one level up from docker's WORKDIR!)
 COPY virtualization/run_app_fullstack_docker.sh /app/run_app_fullstack_docker.sh
