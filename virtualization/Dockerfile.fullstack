@@ -1,7 +1,11 @@
-############################### EXECUTION NOTICE #######################
+################################# NOTICE ########################################
+# This file serves for building a docker container of BOTH FRONTEND AND BACKEND !
+############################### EXECUTION NOTICE ################################
 # to build image with this file, ALWAYS start building process from project root! 
 # i.e. one level above "virtualization"-> project root)
-################################ backend stage ########################
+
+
+################################ backend stage ##################################
 # import python base image
 FROM python:3.12-slim AS backend
 # create backend in working directory
@@ -10,8 +14,14 @@ WORKDIR /app/backend
 COPY backend/requirements.txt .
 # install requirements with pip
 RUN pip install --no-cache-dir -r requirements.txt
-# copy backend contents into backend root ("." =  /app/backend)
-COPY backend/ .
+# copy backend contents into backend root ("." =  /app/backend).
+# do this selectively, i.e. manually chose folders!
+COPY backend/src/api ./src/api
+COPY backend/src/business_logic ./src/business_logic
+COPY backend/src/data/test ./src/data/test
+COPY backend/src/data/helpers.py ./src/data/helpers.py
+COPY backend/src/models/mlartifacts ./src/models/mlartifacts
+COPY backend/src/models/mlruns ./src/models/mlruns
 
 ################################ frontend stage ########################
 # import node base image
@@ -19,12 +29,14 @@ FROM node:20-slim AS frontend
 # create frontend in working directory
 WORKDIR /app/frontend
 # install required node modules (react, bootstrap, etc.) NOTE: using altered package.json, docker specific (no "set" command in npm run)!
+# NOTE: using altered package.docker.json, docker specific (no "set" command in npm run)!
+# Then renaming package.docker.json to package.json
 COPY frontend/package.docker.json ./package.json
 COPY frontend/package-lock.json ./package-lock.json
+COPY frontend/public ./public
+COPY frontend/src ./src
 # install modules
 RUN npm install --production
-# copy frontend contents into frontend root ("." =  /app/frontend)
-COPY frontend/ .
 
 ################################ final stage ##########################
 # use python as base image
@@ -40,11 +52,11 @@ RUN apt-get update && apt-get install -y curl \
 COPY --from=backend /app/backend /app/backend
 COPY --from=frontend /app/frontend /app/frontend
 # copy start script from "virtualization" to parent directory of frontend (one level up from docker's WORKDIR!)
-COPY run_app_docker.sh /app/run_app_docker.sh
+COPY virtualization/run_app_fullstack_docker.sh /app/run_app_fullstack_docker.sh
 
 ################################ ports and run configuration ##########
 # open communication ports
 EXPOSE 8000 8080 3000
 
 # command ran during the docker building process
-CMD ["bash", "/app/run_app_docker.sh"]
+CMD ["bash", "/app/run_app_fullstack_docker.sh"]

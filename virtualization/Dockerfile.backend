@@ -3,6 +3,8 @@
 ############################### EXECUTION NOTICE #######################
 # to build image with this file, ALWAYS start building process from project root! 
 # i.e. one level above "virtualization"-> project root)
+
+
 ################################ backend stage ########################
 # import python base image
 FROM python:3.12-slim
