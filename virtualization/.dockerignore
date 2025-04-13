@@ -9,6 +9,7 @@ backend/src/data/train/**/*
 
 # frontend: ignore unneccessary frontend contents
 frontend/node_modules
+frontend/package_local.json
 
 # virtualization (contains dockerfile and .dockerignore): ignore docker files
 virtualization

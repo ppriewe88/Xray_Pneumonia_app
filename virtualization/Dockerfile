@@ -16,7 +16,7 @@ FROM node:20-slim AS frontend
 # create frontend in working directory
 WORKDIR /app/frontend
 # install required node modules (react, bootstrap, etc.)
-COPY frontend/package*.json .
+COPY frontend/package.json frontend/package-lock.json ./
 # install modules
 RUN npm install --production
 # copy frontend contents into frontend root ("." =  /app/frontend)
