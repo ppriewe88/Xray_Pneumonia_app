@@ -16,11 +16,11 @@ COPY frontend/src ./src
 # install modules
 RUN npm install --production
 # copy start script from "virtualization" to parent directory of frontend (one level up from docker's WORKDIR!)
-COPY run_app_docker.sh /app/run_app_docker.sh
+COPY virtualization/run_app_frontend_docker.sh /app/run_app_frontend_docker.sh
 
 ################################ ports and run configuration ##########
 # open communication ports
 EXPOSE 3000
 
-# command ran during the docker building process
-CMD ["bash", "/app/run_app_docker.sh"]
+# command ran during the docker building process. Calls starting script from WORKDIR parent
+CMD ["bash", "/app/run_app_frontend_docker.sh"]

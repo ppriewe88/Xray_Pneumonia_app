@@ -11,9 +11,6 @@ backend/src/data/train/**/*
 frontend/node_modules
 frontend/package.json
 
-# virtualization (contains dockerfile and .dockerignore): ignore docker files
-virtualization
-
 # git: ignore git files
 .git/
 .gitignore
