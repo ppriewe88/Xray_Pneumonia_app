@@ -6,3 +6,5 @@ mlflow server --host 127.0.0.1 --port 8080 &
 cd ../api/
 # run api script
 python api_server.py
+# run react app locally
+# NODE_OPTIONS=--openssl-legacy-provider npm start -- --host 0.0.0.0

@@ -15,8 +15,9 @@ COPY backend/ .
 FROM node:20-slim AS frontend
 # create frontend in working directory
 WORKDIR /app/frontend
-# install required node modules (react, bootstrap, etc.)
-COPY frontend/package.json frontend/package-lock.json ./
+# install required node modules (react, bootstrap, etc.) NOTE: using altered package.json, docker specific (no "set" command in npm run)!
+COPY frontend/package.docker.json ./package.json
+COPY frontend/package-lock.json ./package-lock.json
 # install modules
 RUN npm install --production
 # copy frontend contents into frontend root ("." =  /app/frontend)
