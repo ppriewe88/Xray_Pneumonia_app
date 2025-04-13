@@ -7,6 +7,6 @@
 # # in backend: start uvicorn server (api) in docker (& tells it to run in the background)
 # uvicorn api_server:app --host 0.0.0.0 --port 8000 &
 # navigate to frontend directory 
-cd app/frontend
+cd /app/frontend
 # in frontend: start react app
 npm run start -- --host 0.0.0.0 --port 3000
