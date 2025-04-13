@@ -5,7 +5,7 @@ backend/venv/
 *.pyo
 *.pyd
 
-backend/src/data/train
+backend/src/data/train/**/*
 
 # frontend: ignore unneccessary frontend contents
 frontend/node_modules
@@ -23,3 +23,11 @@ run_app.sh
 
 # ignore potential log files
 *.log
+
+# ignore temp files
+*.tmp
+*.cache
+
+# ignore system files
+.DS_Store
+Thumbs.db
