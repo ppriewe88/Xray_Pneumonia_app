@@ -6,13 +6,15 @@
 FROM node:20-slim
 # create frontend in working directory
 WORKDIR /app/frontend
-# install required node modules (react, bootstrap, etc.) NOTE: using altered package.json, docker specific (no "set" command in npm run)!
+# install required node modules via package.json (NOT all node_modules) 
+# NOTE: using altered package.docker.json, docker specific (no "set" command in npm run)!
+# Then renaming package.docker.json to package.json
 COPY frontend/package.docker.json ./package.json
 COPY frontend/package-lock.json ./package-lock.json
+COPY frontend/public ./public
+COPY frontend/src ./src
 # install modules
 RUN npm install --production
-# copy frontend contents into frontend root ("." =  /app/frontend)
-COPY frontend/ .
 # copy start script from "virtualization" to parent directory of frontend (one level up from docker's WORKDIR!)
 COPY run_app_docker.sh /app/run_app_docker.sh
 

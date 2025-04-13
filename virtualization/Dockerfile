@@ -29,6 +29,8 @@ COPY frontend/ .
 ################################ final stage ##########################
 # use python as base image
 FROM python:3.12-slim
+# IMPORTANT: set WORKDIR correctly!
+WORKDIR /app
 # install node again
 RUN apt-get update && apt-get install -y curl \
     && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
@@ -45,4 +47,4 @@ COPY run_app_docker.sh /app/run_app_docker.sh
 EXPOSE 8000 8080 3000
 
 # command ran during the docker building process
-CMD ["bash", "run_app_docker.sh"]
+CMD ["bash", "/app/run_app_docker.sh"]
