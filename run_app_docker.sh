@@ -10,5 +10,3 @@ uvicorn api_server:app --host 0.0.0.0 --port 8000 &
 cd /app/frontend
 # in frontend: start react app
 npm run start -- --host 0.0.0.0 --port 3000
-# keep processes running
-wait
