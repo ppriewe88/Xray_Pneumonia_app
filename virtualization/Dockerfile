@@ -1,3 +1,6 @@
+############################### EXECUTION NOTICE #######################
+# to build image with this file, ALWAYS start building process from project root! 
+# i.e. one level above "virtualization"-> project root)
 ################################ backend stage ########################
 # import python base image
 FROM python:3.12-slim AS backend
@@ -34,6 +37,8 @@ RUN apt-get update && apt-get install -y curl \
 # copy backend and frontend
 COPY --from=backend /app/backend /app/backend
 COPY --from=frontend /app/frontend /app/frontend
+# copy start script from "virtualization" to parent directory of frontend (one level up from docker's WORKDIR!)
+COPY run_app_docker.sh /app/run_app_docker.sh
 
 ################################ ports and run configuration ##########
 # open communication ports

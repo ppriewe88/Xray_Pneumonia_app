@@ -1,0 +1,24 @@
+############################### EXECUTION NOTICE #######################
+# to build image with this file, ALWAYS start building process from project root! 
+# i.e. one level above "virtualization"-> project root)
+################################ frontend ONLY!! ########################
+# import node base image
+FROM node:20-slim
+# create frontend in working directory
+WORKDIR /app/frontend
+# install required node modules (react, bootstrap, etc.) NOTE: using altered package.json, docker specific (no "set" command in npm run)!
+COPY frontend/package.docker.json ./package.json
+COPY frontend/package-lock.json ./package-lock.json
+# install modules
+RUN npm install --production
+# copy frontend contents into frontend root ("." =  /app/frontend)
+COPY frontend/ .
+# copy start script from "virtualization" to parent directory of frontend (one level up from docker's WORKDIR!)
+COPY run_app_docker.sh /app/run_app_docker.sh
+
+################################ ports and run configuration ##########
+# open communication ports
+EXPOSE 3000
+
+# command ran during the docker building process
+CMD ["bash", "/app/run_app_docker.sh"]
