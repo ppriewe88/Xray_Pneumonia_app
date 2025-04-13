@@ -1,3 +1,5 @@
+################################# NOTICE ###############################
+# This file serves for building a docker container of the FRONTEND ONLY!
 ############################### EXECUTION NOTICE #######################
 # to build image with this file, ALWAYS start building process from project root! 
 # i.e. one level above "virtualization"-> project root)
@@ -21,6 +23,5 @@ COPY virtualization/run_app_frontend_docker.sh /app/run_app_frontend_docker.sh
 ################################ ports and run configuration ##########
 # open communication ports
 EXPOSE 3000
-
 # command ran during the docker building process. Calls starting script from WORKDIR parent
 CMD ["bash", "/app/run_app_frontend_docker.sh"]
