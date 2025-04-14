@@ -71,7 +71,7 @@ def check_challenger_takeover(last_n_predictions = 20, window=50):
     
     # # Breaking condition nr. 2: check if switch was done in the previous {last_n_predictions} runs. If so, break
     # organize the last {last_n_predictions} model tag in a list, get unique tags (set)
-    last_model_tags_unique = set([row['model_tag'] for row in rows[-(last_n_predictions+window):]])
+    last_model_tags_unique = set([row['model_tag'] for row in rows[-(last_n_predictions+window+30):]])
     # check is switch was performed, i.e. more than one model tags in history
     switch_done = len(last_model_tags_unique) > 1
     # quit the function if the switch was done in the last {last_n_predictions + window} runs
