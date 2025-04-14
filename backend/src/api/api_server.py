@@ -153,8 +153,8 @@ async def upload_image_and_integer_from_frontend(
 
 ' ############################### bulk prediction endpoint ##########################################################'
 # endpoint for analysing more images
-@app.post("/predict_several_images")
-async def predict_several_images( 
+@app.post("/predict_random_bulk")
+async def predict_random_bulk( 
     n_samples: int
 ):
     """
