@@ -226,7 +226,7 @@ def get_image_paths(n_samples):
     # paths to image folders
     normal_folder = project_folder / "data" / "test" / "NORMAL"
     pneumonia_folder = project_folder / "data" / "test" / "PNEUMONIA"
-    tracking_csv_path = project_folder / "unified_experiment" / "performance_tracking" / "performance_data_champion.csv"
+    tracking_csv_path = project_folder / "models" / "performance_tracking" / "performance_data_champion.csv"
 
     # load images of both classes
     normal_images = list(normal_folder.glob("*"))

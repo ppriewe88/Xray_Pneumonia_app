@@ -1,6 +1,7 @@
 import uvicorn
 import numpy as np
 from fastapi import FastAPI, UploadFile, File, Form, Query, Response
+from fastapi.responses import JSONResponse
 from enum import Enum
 import mlflow
 from datetime import datetime
@@ -177,7 +178,7 @@ async def predict_random_bulk(
     # peform classification + logging + model switch when needed
     inf.predict_log_switch(selected_image_paths)
        
-    return "All predictions done."
+    return JSONResponse(content={"message": "All predictions done."})
 
 ' ############################### performance review endpoint ############################################################'
 # endpoint for uploading image
