@@ -52,11 +52,11 @@ def home():
     """
     return "root of this API"
 
-' ############################### model serving/prediction endpoint ###############################'
+' ############################### frontend-suitable model serving/prediction endpoint ###############################'
 # endpoint for uploading image
-@app.post("/upload_image")
-async def upload_image_with_label( 
-    label: Label,
+@app.post("/upload_image_from_frontend")
+async def upload_image_and_integer_from_frontend( 
+    label: int = Form(...),
     file: UploadFile = File(...)
 ):
     """
@@ -69,95 +69,6 @@ async def upload_image_with_label(
 
     Results (i.e. performance) of the classifiers will as well be logged into csv-files, and into mlflow-logged runs.
     Hence, all information of the given predictions is returned to the user and tracked in the file system.
-
-    Parameters
-    ----------
-    label : object of class Label, see definition on top of this script
-        Hold as human level prediction of the image
-    file : UploadFile (FastAPI-form)
-        Serves byte object of input file.
-        
-    Returns
-    -------
-    y_pred_as_str : string containing dictionaries
-        Contains three nested dictionaries with prediction values and logging parameters. 
-        One for each model alias, i.e. champion, challenger, baseline.
-    """
-
-    # read the uploaded file into memory as bytes
-    image_bytes = await file.read()
-
-    # validate image and return as numpy
-    img = inf.return_verified_image_as_numpy_arr(image_bytes)
-
-    # set tracking uri for mlflow
-    mlflow.set_tracking_uri("http://127.0.0.1:8080")
-
-    # vessel for API-output
-    y_pred_as_str = {}
-    
-    model_name = "Xray_classifier"
-    api_timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    # ########################### load, predict, log metric for champion and challenger ################'
-    for  alias in ["champion", "challenger", "baseline"]:
-        
-        # get model and signature
-        model, input_shape, input_type  = inf.load_model_from_registry(model_name = model_name, alias = alias)
-        
-        # get model version and tag for logging
-        model_version, model_tag = inf.get_modelversion_and_tag(model_name=model_name, model_alias=alias)
-
-        # resize image according to signature
-        formatted_image = inf.resize_image(image=img, signature_shape = input_shape, signature_dtype=input_type)
-        
-        # make prediction
-        y_pred = inf.make_prediction(model, image_as_array=formatted_image)
-        accuracy_pred = int(label == np.around(y_pred))
-
-        # logging and precalculations in csv-file
-        logged_csv_data = lg.save_performance_data_csv(alias = alias, 
-                                                       timestamp = api_timestamp, 
-                                                       y_true = label.value, 
-                                                       y_pred = y_pred, 
-                                                       accuracy=accuracy_pred, 
-                                                       file_name=file.filename, 
-                                                       model_version=model_version, 
-                                                       model_tag=model_tag)
-
-        # switch off mlflow tracking (if needed)
-        mlflow_tracking = False 
-        if mlflow_tracking:
-            # logging in mlflow performance runs, if switched on
-            lg.save_performance_data_mlflow(log_counter = logged_csv_data["log_counter"], 
-                                            alias = alias, 
-                                            timestamp = logged_csv_data["timestamp"], 
-                                            y_true = label, 
-                                            y_pred = y_pred, 
-                                            accuracy = accuracy_pred, 
-                                            file_name = logged_csv_data["filename"], 
-                                            model_version = model_version, 
-                                            model_tag = model_tag)
-
-        # update dictionary for API-output
-        y_pred_as_str.update({f"prediction {alias}": str(y_pred)})
-    
-    print(f"Currently at run with log_counter number {logged_csv_data['log_counter']}.")
-    # check if switch should be made
-    if ms.check_challenger_takeover(last_n_predictions = 20, window = 50):
-        ms.switch_champion_and_challenger()
-    
-    return y_pred_as_str
-
-' ############################### frontend-suitable model serving/prediction endpoint ###############################'
-# endpoint for uploading image
-@app.post("/upload_image_from_frontend")
-async def upload_image_and_integer_from_frontend( 
-    label: int = Form(...),
-    file: UploadFile = File(...)
-):
-    """
-    Functionality is copied from endpoint "upload/image". 
-    Differs only in input structure due to frontend requirements. 
 
     Parameters
     ----------
