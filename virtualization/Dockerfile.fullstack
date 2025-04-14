@@ -22,6 +22,7 @@ COPY backend/src/data/test ./src/data/test
 COPY backend/src/data/helpers.py ./src/data/helpers.py
 COPY backend/src/models/mlartifacts ./src/models/mlartifacts
 COPY backend/src/models/mlruns ./src/models/mlruns
+COPY backend/src/models/performance_tracking ./src/models/performance_tracking
 
 ################################ frontend stage ########################
 # import node base image
