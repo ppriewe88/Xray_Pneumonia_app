@@ -43,7 +43,7 @@ app.add_middleware(
     allow_headers=["*"],  # allow all headers
 )
 
-' ################################################## root endpoint ###############################'
+' ################################################## root endpoint ####################################################'
 # root
 @app.get("/")
 def home():
@@ -51,6 +51,7 @@ def home():
     Serves as root for API.
     """
     return "root of this API"
+
 
 ' ############################### frontend-suitable model serving/prediction endpoint ###############################'
 # endpoint for uploading image
@@ -83,9 +84,7 @@ async def upload_image_and_integer_from_frontend(
         Contains three nested dictionaries with prediction values and logging parameters. 
         One for each model alias, i.e. champion, challenger, baseline.
     """
-    print("label: ", label, "type label: ", type(label))
     label = Label(label)
-    print("label: ", label, "type label: ", type(label))
 
     # read the uploaded file into memory as bytes
     image_bytes = await file.read()
@@ -151,7 +150,36 @@ async def upload_image_and_integer_from_frontend(
 
     return y_pred_as_str
 
-' ############################### performance review endpoint ###############################'
+
+' ############################### bulk prediction endpoint ##########################################################'
+# endpoint for analysing more images
+@app.post("/predict_several_images")
+async def predict_several_images( 
+    n_samples: int
+):
+    """
+    Classifies several images without needing to load the keras models several times.
+    The images are chosen randomly.
+    
+    Parameters
+    ----------
+    n_samples: int
+        Number of images to be classified.
+    
+    Returns
+    -------
+        String confirming that all images were succesfully classified.
+    """
+    
+    # get the image paths
+    selected_image_paths = inf.get_image_paths(n_samples)
+
+    # peform classification + logging + model switch when needed
+    inf.predict_log_switch(selected_image_paths)
+       
+    return "All predictions done."
+
+' ############################### performance review endpoint ############################################################'
 # endpoint for uploading image
 @app.post("/get_performance_review_from_mlflow")
 async def get_performance_mlflow(
@@ -179,7 +207,7 @@ async def get_performance_mlflow(
     return performance_dict
 
 
-' ############################### performance review endpoint CSV ###############################'
+' ############################### performance review endpoint CSV #####################################################'
 # endpoint for uploading image
 @app.post("/get_performance_review_from_csv")
 async def get_performance_csv(
@@ -212,11 +240,10 @@ async def get_performance_csv(
     return merged_csv_dict
 
 
-' ######################## plotting endpoint: performance curve and aliases #####################'
+' ######################## plotting endpoint: performance curve and aliases ############################################'
 # endpoint for plot generation
 @app.post("/get_comparsion_plot")
 async def plot_model_comparison(window: int = 50):
-    
     '''
     Endpoint that displays a plot showing the moving average accuracy
     of the champion and challenger models.  
@@ -245,11 +272,10 @@ async def plot_model_comparison(window: int = 50):
     # send the binary image as a png response to the client
     return Response(binary_image, media_type="image/png")
 
-' ######################## plotting endpoint: confusion matrix #####################'
+' ######################## plotting endpoint: confusion matrix #################################################'
 # endpoint for plot generation
 @app.post("/get_confusion_matrix_plot")
 async def plot_confusion_matrix(window: int = 50):
-    
     '''
     Endpoint that displays a plot showing the confusion matrix of the champion model for the last n predictions.  
     '''
@@ -275,7 +301,7 @@ async def plot_confusion_matrix(window: int = 50):
     # send the binary image as a png response to the client
     return Response(binary_image, media_type="image/png")
 
-' ################################ host specification ################# '
+' ################################ host specification ########################################################### '
 
 # my localhost adress
 host = "127.0.0.1"
