@@ -95,7 +95,7 @@ def save_performance_data_csv(alias, timestamp, y_true, y_pred, accuracy, file_n
         writer.writerow(data)
 
     # print runtime and execution confirmation
-    print(f"Data has been saved in {file_path}.")
+    #print(f"Data has been saved in {file_path}.")
 
     return data
 

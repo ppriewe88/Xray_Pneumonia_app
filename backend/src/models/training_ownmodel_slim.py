@@ -14,13 +14,14 @@ from mlflow_logging import log_mlflow_run
 
 
 BATCH_SIZE = 128
-EPOCHS = 15
+EPOCHS = 10
+RUN_NAME = 'CNN demo'
 
 loss_func = "binary_crossentropy"
-learning_rate = 0.01
-momentum = 0.8
+learning_rate = 0.001
+momentum = 0.2
 optimizer = keras.optimizers.SGD(learning_rate = learning_rate, momentum = momentum)
-dropout_rate = 0.3
+dropout_rate = 0.1
 
 mlflow_logging = True
 
@@ -65,35 +66,10 @@ def get_model(dropout_rate):
         )(x) # output shape = (IMGSIZE, IMGSIZE, 8)
     
     x = keras.layers.MaxPooling2D(pool_size=(4, 4))(x) # output shape = (IMGSIZE/4, IMGSIZE/4, 8) 
-    
-    # Second block 
-    x = keras.layers.Conv2D(
-        filters=16,
-        kernel_size = (3,3),
-        strides = (1,1),
-        padding = 'same',
-        activation = 'relu',
-        kernel_regularizer = None
-        )(x) # output shape = (IMGSIZE/4, IMGSIZE/4, 16)
-    
-    x = keras.layers.MaxPooling2D(pool_size=(4, 4))(x) # output shape = (IMGSIZE/16, IMGSIZE/16, 16) 
-    
-    # Third block 
-    x = keras.layers.Conv2D(
-        filters=32,
-        kernel_size = (3,3),
-        strides = (1,1),
-        padding = 'same',
-        activation = 'relu',
-        kernel_regularizer = None
-        )(x) # output shape = (IMGSIZE/16, IMGSIZE/16, 32)
-    
-    x = keras.layers.MaxPooling2D(pool_size=(4, 4))(x) # output shape = (IMGSIZE/64, IMGSIZE/64, 32) = (4,4,32)
-    
+        
     # Head (Flatten + Dense Layer)
-    
     x = keras.layers.Flatten()(x) # output shape = 512
-    x = keras.layers.Dense(10, activation="relu", kernel_regularizer = None)(x)
+    x = keras.layers.Dense(2, activation="relu", kernel_regularizer = None)(x)
     
     if dropout_rate > 0:
         x = keras.layers.Dropout(dropout_rate)(x)
@@ -164,7 +140,7 @@ if mlflow_logging:
     
     log_mlflow_run(
     model, # keras model to be logged
-    run_name = 'CNN demo', # string that will be displayed as the run title in mlflow GUI
+    run_name = RUN_NAME, # string that will be displayed as the run title in mlflow GUI
     epochs = EPOCHS,
 	batch_size = BATCH_SIZE,
 	loss_function = loss_func,

@@ -1,14 +1,31 @@
-**venv/
-**/pneumonia/
+# backend: ignore unneccessary backend contents
+backend/venv/
+**__pycache__
 *.pyc
 *.pyo
 *.pyd
 
-**/data/
+backend/src/data/train/**/*
 
-# ignore local git files
+# frontend: ignore unneccessary frontend contents
+frontend/node_modules
+frontend/package.json
+
+# git: ignore git files
 .git/
 .gitignore
 
+# starting scripts: ignore scripts for local start (only take script for docker)
+run_app.bat
+run_app.sh
+
 # ignore potential log files
 *.log
+
+# ignore temp files
+*.tmp
+*.cache
+
+# ignore system files
+.DS_Store
+Thumbs.db

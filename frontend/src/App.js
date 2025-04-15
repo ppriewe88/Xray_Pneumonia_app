@@ -13,10 +13,10 @@ const NavigationBar = ({ activeTab, setActiveTab }) => {
         Inference
       </Button>
       <Button
-        variant={activeTab === "statistics" ? "primary" : "light"}
-        onClick={() => setActiveTab("statistics")}
+        variant={activeTab === "performance" ? "primary" : "light"}
+        onClick={() => setActiveTab("performance")}
       >
-        Statistics
+        Performance Monitoring
       </Button>
       <Button
         variant={activeTab === "api" ? "primary" : "light"}
@@ -43,7 +43,6 @@ const FileUpload = ({ onFileSelect }) => {
       onFileSelect(file);
     }
   };
-
   return (
     <div className="file-upload">
       <input
@@ -88,7 +87,7 @@ const ImagePreview = ({ file }) => {
       <img
         src={URL.createObjectURL(file)}
         alt="Preview"
-        style={{ maxWidth: "100%", maxHeight: "300px" }}
+        style={{ maxWidth: "90%", maxHeight: "520px" }}
       />
     </div>
   );
@@ -110,15 +109,38 @@ const PredictButton = ({ onPredict, isDisabled }) => {
 // ############################ prediction item ###############
 const PredictionItem = ({ label, value }) => {
   const formatPrediction = (value) => {
-    return (
-      " pneumonia indication " + (parseFloat(value) * 100).toFixed(2) + "%"
-    );
+    return (parseFloat(value) * 100).toFixed(1) + "%" + "  indication";
   };
 
   return (
-    <div className="prediction-item">
-      <span className="prediction-label">{label}:</span>
-      <span className="prediction-value">{formatPrediction(value)}</span>
+    <div
+      className={
+        label.toLowerCase() === "champion"
+          ? "prediction-item-large"
+          : "prediction-item"
+      }
+    >
+      <span
+        className={
+          label.toLowerCase() === "champion"
+            ? "prediction-label-large"
+            : "prediction-label"
+        }
+      >
+        {label.toLowerCase() === "champion"
+          ? `Active model (${label})`
+          : `Shadow model (${label})`}
+        :
+      </span>
+      <span
+        className={
+          label.toLowerCase() === "champion"
+            ? "prediction-value-large"
+            : "prediction-value"
+        }
+      >
+        {formatPrediction(value)}
+      </span>
     </div>
   );
 };
@@ -271,12 +293,37 @@ const ConfusionMatrixPlot = ({ matrixUrl }) => {
   );
 };
 
-// #################### wrapper component for all statistics ############
+// #################### Input component for model comparison plot #######
+const BulkPredictionInput = ({ value, onChange }) => {
+  return (
+    <input
+      type="number"
+      value={value}
+      onChange={onChange}
+      placeholder="Enter a positive integer"
+      min="1"
+      className="statistics-input" // Füge eine CSS-Klasse hinzu
+    />
+  );
+};
+
+// #################### Button to trigger bulk prediction ############
+const TriggerBulkPrediction = ({ onClick }) => {
+  return (
+    <Button onClick={onClick} className="statistics-button">
+      Go!
+    </Button>
+  );
+};
+// #################### wrapper component for all statistic functions ########################
 const StatisticsViewer = ({}) => {
   const [inputValue, setInputValue] = useState("50");
   const [plotUrl, setPlotUrl] = useState(null);
   const [matrixValue, setMatrixValue] = useState("50");
   const [matrixUrl, setMatrixUrl] = useState(null);
+  const [bulkPredValue, setBulkPredValue] = useState("10");
+  const [bulkPredictionResult, setBulkPredictionResult] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleInputChange = (event) => {
     const value = event.target.value;
@@ -291,6 +338,14 @@ const StatisticsViewer = ({}) => {
     // Überprüfen, ob der Wert eine positive ganze Zahl ist
     if (/^\d+$/.test(value) || value === "") {
       setMatrixValue(value);
+    }
+  };
+
+  const handleBulkPredInputChange = (event) => {
+    const value = event.target.value;
+    // Überprüfen, ob der Wert eine positive ganze Zahl ist
+    if (/^\d+$/.test(value) || value === "") {
+      setBulkPredValue(value);
     }
   };
 
@@ -359,33 +414,88 @@ const StatisticsViewer = ({}) => {
     }
   };
 
+  const fetchBulkPrediction = async () => {
+    const bulkSize = parseInt(bulkPredValue, 10);
+
+    if (isNaN(bulkSize) || bulkSize <= 0) {
+      alert("Please enter a valid positive integer for bulk prediction.");
+      return;
+    }
+
+    setIsLoading(true);
+    setBulkPredictionResult(null);
+
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:8000/predict_random_bulk?n_samples=${bulkSize}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      setBulkPredictionResult(result.message);
+    } catch (error) {
+      console.error("Error performing bulk prediction:", error);
+      setBulkPredictionResult("Error during prediction.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="statistics-container">
       <h1 className="header-title">Xray Pneumonia Detection</h1>
-      <div className="statistics-content-container">
-        <div className="left-column">
-          <div className="control-container-plot">
-            <span className="window-param-setting">Enter window parameter</span>
-            <ModelComparisonInput
-              value={inputValue}
-              onChange={handleInputChange}
-            />
-            <ShowModelComparisonButton onClick={fetchComparisonPlot} />
+      <div>
+        <div className="statistics-content-container">
+          <div className="left-column">
+            <div className="control-container-plot">
+              <span className="statistics-param-setting">
+                Enter window parameter
+              </span>
+              <ModelComparisonInput
+                value={inputValue}
+                onChange={handleInputChange}
+              />
+              <ShowModelComparisonButton onClick={fetchComparisonPlot} />
+            </div>
+            <ModelComparisonPlot plotUrl={plotUrl} />
           </div>
-          <ModelComparisonPlot plotUrl={plotUrl} />
+          <div className="right-column">
+            <div className="control-container-matrix">
+              <span className="statistics-param-setting">
+                Enter last n predictions
+              </span>
+              <ConfusionMatrixInput
+                value={matrixValue}
+                onChange={handleMatrixInputChange}
+              />
+              <ShowConfusionMatrixButton onClick={fetchConfusionMatrix} />
+            </div>
+            <ConfusionMatrixPlot matrixUrl={matrixUrl} />
+          </div>
         </div>
-        <div className="right-column">
-          <div className="control-container-matrix">
-            <span className="window-param-setting">
-              Enter last n predictions
-            </span>
-            <ConfusionMatrixInput
-              value={matrixValue}
-              onChange={handleMatrixInputChange}
-            />
-            <ShowConfusionMatrixButton onClick={fetchConfusionMatrix} />
-          </div>
-          <ConfusionMatrixPlot matrixUrl={matrixUrl} />
+      </div>
+      <div className="bulk-prediction-container">
+        <span className="statistics-param-setting">Bulk prediction of</span>
+        <BulkPredictionInput
+          value={bulkPredValue}
+          onChange={handleBulkPredInputChange}
+        />
+        <span className="statistics-param-setting-bulk">values</span>
+        <TriggerBulkPrediction onClick={fetchBulkPrediction} />
+        <div className="statistics-param-setting">
+          {isLoading && <div className="loading-spinner"></div>}
+          {!isLoading && bulkPredictionResult && (
+            <span>{bulkPredictionResult}</span>
+          )}
         </div>
       </div>
     </div>
@@ -485,7 +595,7 @@ function App() {
               handlePrediction={handlePrediction}
             />
           )}
-          {activeTab === "statistics" && <StatisticsViewer />}
+          {activeTab === "performance" && <StatisticsViewer />}
           {activeTab === "api" && <APIDocsViewer />}
           {activeTab === "mlflow" && <MLFlowViewer />}
         </div>

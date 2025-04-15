@@ -20,6 +20,9 @@ More specific:
 USER MANUAL: 
 - simply specify the amount of samples (test images) that should be sent to the API
 - Do so by specifying the samples variable in the block "configure nr. of samples to generate".
+NOTICE:
+- script has low performance (long runtime), as model loading will be done for each single image! 
+- Better use endpoint for buld prediction!
 HINT:
 - the mlflow server AND the FastAPI server have to be running during the execution of this script here!
 """
@@ -31,12 +34,12 @@ class Label(int, Enum):
     POSITIVE = 1
 
 base_url = "http://127.0.0.1:8000"
-endpoint = "/upload_image"
+endpoint = "/upload_image_from_frontend"
 url_with_endpoint = base_url + endpoint
 
 ' ################################ configure nr. of samples to generate #############'
 # samples (prediction runs) to be generated
-n_samples = 200
+n_samples = 10
 
 ' ################################ get images ########################################'
 # Get absolute path of the project dir
@@ -78,10 +81,10 @@ for i, image_file in enumerate(selected_images):
         
         # get class from parent folder name
         data_class = image_file.parent.name
-        params = {"label": Label.NEGATIVE.value if data_class == "NORMAL" else Label.POSITIVE.value}
+        data = {"label": str(Label.NEGATIVE.value) if data_class == "NORMAL" else str(Label.POSITIVE.value)}
 
         # make API call
-        response = requests.post(url_with_endpoint, files=files, params=params)
+        response = requests.post(url_with_endpoint, files=files, data=data)
         status_code = response.status_code
 
         # quick response logging

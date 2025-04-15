@@ -38,7 +38,7 @@
 
 .navigation-bar button {
   margin: 0 5px;
-  padding: 8px 160px;
+  padding: 8px 150px;
   font-weight: 500;
 }
 
@@ -100,8 +100,7 @@
   margin-top: 10px;
   padding: 5px;
   max-width: 1500px;
-  height: auto; /* Geändert von 500px auf auto */
-  min-height: 500px; /* Feste Mindesthöhe */
+  height: 650px;
   border: 2px solid white;
   border-radius: 10px;
 }
@@ -123,7 +122,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 700px;
+  width: 680px;
   margin-bottom: 10px;
   padding: 10px;
   margin-top: 10px;
@@ -139,7 +138,11 @@
   border: 2px solid white;
   border-radius: 4px;
   font-size: 28px;
-  background-color: rgba(114, 116, 126, 0.788);
+  background-color: rgba(148, 135, 135, 0.308);
+}
+
+.file-upload:hover {
+  background-color: rgba(215, 210, 210, 0.623);
 }
 
 .label-select {
@@ -180,17 +183,17 @@
 .prediction-results-container {
   border: 2px solid white;
   border-radius: 10px;
-  padding: 20px;
+  padding: 10px;
   margin-top: 10px;
   background-color: rgba(255, 255, 255, 0.1);
-  width: 700px;
-  height: 95%;
+  width: 750px;
+  height: 620px;
   box-sizing: border-box;
 }
 
 .prediction-results-title {
   color: white;
-  font-size: 24px;
+  font-size: 32px;
   margin-bottom: 15px;
   text-align: center;
 }
@@ -208,42 +211,71 @@
   word-wrap: break-word;
 }
 
+.prediction-item-large {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px 5px;
+  margin-bottom: 5px;
+  background-color: rgba(201, 191, 191, 0.177);
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  height: 80px;
+}
+
+.prediction-item-large:hover {
+  background-color: rgba(211, 208, 208, 0.356);
+}
+
 .prediction-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 3px 5px;
   margin-bottom: 5px;
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(176, 166, 166, 0.05);
   border-radius: 5px;
   transition: background-color 0.3s ease;
 }
 
 .prediction-item:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(211, 208, 208, 0.356);
+}
+
+.prediction-label-large {
+  font-weight: bold;
+  color: #e0e0e0;
+  font-size: 26px;
 }
 
 .prediction-label {
   font-weight: bold;
   color: #e0e0e0;
-  font-size: 28px;
+  font-size: 16px;
+}
+
+.prediction-value-large {
+  font-family: monospace;
+  font-size: 1.1em;
+  color: #e0e0e0;
+  font-size: 30px;
 }
 
 .prediction-value {
   font-family: monospace;
   font-size: 1.1em;
   color: #e0e0e0;
-  font-size: 28px;
+  font-size: 16px;
 }
 
 .loading-spinner {
   border: 4px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
   border-top: 4px solid #ffffff;
-  width: 40px;
-  height: 40px;
+  width: 20px;
+  height: 20px;
   animation: spin 1s linear infinite;
-  margin: 20px auto;
+  margin: 1px auto;
 }
 
 @keyframes spin {
@@ -258,9 +290,13 @@
 .predict-button {
   border: 2px solid white;
   border-radius: 4px;
-  background-color: rgba(114, 116, 126, 0.788);
   color: white;
   font-size: 26px;
+  background-color: rgba(148, 135, 135, 0.308);
+}
+
+.predict-button:hover {
+  background-color: rgba(215, 210, 210, 0.623);
 }
 
 .statistics-content-container {
@@ -283,11 +319,18 @@
   height: 16px; /* Reduziere die Höhe */
 }
 
-.window-param-setting {
+.statistics-param-setting {
   font-size: 20px;
   margin-left: 15px;
   margin-right: 15px;
 }
+
+.statistics-param-setting-bulk {
+  font-size: 20px;
+  margin-left: 0px;
+  margin-right: 15px;
+}
+
 .statistics-button {
   height: 30px; /* Reduziere die Höhe */
   padding: 5px 10px; /* Passe die Innenabstände an */
@@ -324,6 +367,18 @@
   display: flex; /* Anordnung nebeneinander */
   align-items: center; /* Zentriert die Elemente vertikal */
   justify-content: center; /* Zentriert die Elemente horizontal */
+  margin-bottom: 10px; /* Abstand zum unteren Inhalt */
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.bulk-prediction-container {
+  border: 2px solid white;
+  width: 1705px;
+  padding: 5px;
+  border-radius: 10px;
+  display: flex; /* Anordnung nebeneinander */
+  align-items: center; /* Zentriert die Elemente vertikal */
+  margin-top: 10px;
   margin-bottom: 10px; /* Abstand zum unteren Inhalt */
   background-color: rgba(255, 255, 255, 0.1);
 }

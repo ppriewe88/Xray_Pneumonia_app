@@ -1,0 +1,29 @@
+################################# NOTICE ###############################
+# This file serves for building a docker container of the FRONTEND ONLY!
+############################### EXECUTION NOTICE #######################
+# to build image with this file, ALWAYS start building process from project root! 
+# i.e. one level above "virtualization"-> project root)
+
+
+################################ frontend ONLY!! ########################
+# import node base image
+FROM node:20-slim
+# create frontend in working directory
+WORKDIR /app/frontend
+# install required node modules via package.json (NOT all node_modules) 
+# NOTE: using altered package.docker.json, docker specific (no "set" command in npm run)!
+# Then renaming package.docker.json to package.json
+COPY frontend/package.docker.json ./package.json
+COPY frontend/package-lock.json ./package-lock.json
+COPY frontend/public ./public
+COPY frontend/src ./src
+# install modules
+RUN npm install --production
+# copy start script from "virtualization" to parent directory of frontend (one level up from docker's WORKDIR!)
+COPY virtualization/run_app_frontend_docker.sh /app/run_app_frontend_docker.sh
+
+################################ ports and run configuration ##########
+# open communication ports
+EXPOSE 3000
+# command ran during the docker building process. Calls starting script from WORKDIR parent
+CMD ["bash", "/app/run_app_frontend_docker.sh"]
