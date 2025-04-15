@@ -43,7 +43,6 @@ const FileUpload = ({ onFileSelect }) => {
       onFileSelect(file);
     }
   };
-
   return (
     <div className="file-upload">
       <input
@@ -88,7 +87,7 @@ const ImagePreview = ({ file }) => {
       <img
         src={URL.createObjectURL(file)}
         alt="Preview"
-        style={{ maxWidth: "100%", maxHeight: "300px" }}
+        style={{ maxWidth: "90%", maxHeight: "520px" }}
       />
     </div>
   );
@@ -110,15 +109,38 @@ const PredictButton = ({ onPredict, isDisabled }) => {
 // ############################ prediction item ###############
 const PredictionItem = ({ label, value }) => {
   const formatPrediction = (value) => {
-    return (
-      " pneumonia indication " + (parseFloat(value) * 100).toFixed(2) + "%"
-    );
+    return (parseFloat(value) * 100).toFixed(1) + "%" + "  indication";
   };
 
   return (
-    <div className="prediction-item">
-      <span className="prediction-label">{label}:</span>
-      <span className="prediction-value">{formatPrediction(value)}</span>
+    <div
+      className={
+        label.toLowerCase() === "champion"
+          ? "prediction-item-large"
+          : "prediction-item"
+      }
+    >
+      <span
+        className={
+          label.toLowerCase() === "champion"
+            ? "prediction-label-large"
+            : "prediction-label"
+        }
+      >
+        {label.toLowerCase() === "champion"
+          ? `Active model (${label})`
+          : `Shadow model (${label})`}
+        :
+      </span>
+      <span
+        className={
+          label.toLowerCase() === "champion"
+            ? "prediction-value-large"
+            : "prediction-value"
+        }
+      >
+        {formatPrediction(value)}
+      </span>
     </div>
   );
 };
