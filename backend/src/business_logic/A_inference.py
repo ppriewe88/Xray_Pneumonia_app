@@ -204,7 +204,7 @@ def make_prediction(model, image_as_array):
     return pred_reshaped
 
 ' ##############################################################################################'
-' ######################### bulk prediction functions##################### #####################'
+' ######################### bulk prediction functions ##########################################'
 
 def get_image_paths(n_samples):
     '''

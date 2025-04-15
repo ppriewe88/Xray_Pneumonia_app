@@ -140,7 +140,7 @@ if mlflow_logging:
     
     log_mlflow_run(
     model, # keras model to be logged
-    run_name = run_name, # string that will be displayed as the run title in mlflow GUI
+    run_name = RUN_NAME, # string that will be displayed as the run title in mlflow GUI
     epochs = EPOCHS,
 	batch_size = BATCH_SIZE,
 	loss_function = loss_func,
