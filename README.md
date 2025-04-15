@@ -1,7 +1,21 @@
 # X-Ray_Pneumonia
 
-This repository holds codes for a hobby / portfolio project.
+This repository holds codes for a hobby / portfolio project.  
 Currently worked on by Patrick and Andrei.
+
+---
+
+### 🧠 Fullstack Project Highlights
+
+- **Fullstack project integration**: Tensorflow models, backend business logic, FastAPI, and React frontend
+
+--- 
+
+<p align="center">
+  <strong><span style="color:red; font-size:1.2em;">🚀 Extensive project and workflow documentation: <em>COMING SOON</em>!</span></strong>
+</p
+
+
 
 temporary hint 1: if keras files are fraudulent due to size and lfs handling, copy original keras-objects from origin main, and add replace locally in mlartifacts folder. Then run the following command for each mlartifacts run:
 
