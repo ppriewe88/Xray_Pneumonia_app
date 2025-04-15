@@ -13,11 +13,12 @@ from mlflow_logging import log_mlflow_run
 
 
 
-BATCH_SIZE = 36
-EPOCHS = 1
+BATCH_SIZE = 128
+EPOCHS = 10
+RUN_NAME = 'CNN demo'
 
 loss_func = "binary_crossentropy"
-learning_rate = 0.000001
+learning_rate = 0.001
 momentum = 0.2
 optimizer = keras.optimizers.SGD(learning_rate = learning_rate, momentum = momentum)
 dropout_rate = 0.1
@@ -139,7 +140,7 @@ if mlflow_logging:
     
     log_mlflow_run(
     model, # keras model to be logged
-    run_name = 'CNN tiny', # string that will be displayed as the run title in mlflow GUI
+    run_name = run_name, # string that will be displayed as the run title in mlflow GUI
     epochs = EPOCHS,
 	batch_size = BATCH_SIZE,
 	loss_function = loss_func,
