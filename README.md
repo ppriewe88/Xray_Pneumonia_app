@@ -13,5 +13,7 @@ Currently worked on by Patrick and Andrei.
 
 <p align="center">
   <strong>🚀 Extensive project and workflow documentation: <em>COMING SOON</em>!</strong>  
+</p>
+<p align="center">
   <strong><a href="https://youtu.be/aaeOJk1loig">📺 Watch short demo video on YouTube</a></strong>
 </p>
