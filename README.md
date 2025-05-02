@@ -13,6 +13,5 @@ Currently worked on by Patrick and Andrei.
 
 <p align="center">
   <strong><span style="color:red; font-size:1.2em;">🚀 Extensive project and workflow documentation: <em>COMING SOON</em>!</span></strong>
-  
-  <strong><a href="https://youtu.be/aaeOJk1loig">📺 Watch short demo video on YouTube</a></strong>
+  <strong><a href="https://youtu.be/aaeOJk1loig">📺 For now, Watch short demo video on YouTube</a></strong>
 </p>
