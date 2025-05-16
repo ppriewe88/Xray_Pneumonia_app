@@ -11,9 +11,13 @@ Currently worked on by Patrick and Andrei.
 
 --- 
 
+
+
 <p align="left">
   <strong><a href="https://youtu.be/aaeOJk1loig">📺 Watch short demo video on YouTube</a></strong>
 </p>
+
+
 
 <p align="left">
   <strong>🚀 Quick Project documentation</strong>  
@@ -31,6 +35,8 @@ Main functionalities:
     - image upload and inferrence (pneumonia indication)
     - visualization of ML models' performance
     - embedded API documentation and model administration panel
+
+
 
 <p align="left">
   <strong> 🤖 Workflow documentation</strong>  
