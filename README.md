@@ -47,11 +47,17 @@ Main functionalities:
 
 
 <p align="left">
-  <strong>🚀 How to start the app</strong>  
+  <strong>🚀 How to start the app locally </strong>  
 </p>
 
-From project directory run:
-   - docker build -f docker/Dockerfile.fullstack -t xray_pneumonia .
-   - docker run -d --name xray_container -p 8000:8000 -p 8080:8080 -p 3000:3000 xray_pneumonia
+Locally prepare Git:
+   - Initialize empty git repository in a local folder (git init)
+   - Specify this Github repository here as the remote origin
+   - Pull content of this repo to your local one (git pull origin main)
+
+Build docker image from local repo to start app locally:
+   - From project directory run:
+   -- docker build -f docker/Dockerfile.fullstack -t xray_pneumonia .
+   -- docker run -d --name xray_container -p 8000:8000 -p 8080:8080 -p 3000:3000 xray_pneumonia
 
 
