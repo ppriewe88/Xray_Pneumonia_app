@@ -12,8 +12,21 @@ Currently worked on by Patrick and Andrei.
 --- 
 
 <p align="center">
-  <strong>🚀 Extensive project and workflow documentation: <em>COMING SOON</em>!</strong>  
+  <strong>🚀 Project and workflow documentation: <em>SEE BELOW</em>!</strong>  
 </p>
 <p align="center">
   <strong><a href="https://youtu.be/aaeOJk1loig">📺 Watch short demo video on YouTube</a></strong>
 </p>
+
+Main functionalities:
+  - Training (backend):
+    - model training: own CNN model, transfer learning (MobileNet), fine tuning (MobileNet)
+    - tracking of training perfomance with `mlflow`
+  - Model administration & tracking (backend):
+    - model registration with `mlflow`
+    - csv logging of model performance on new, unseen data
+    - supervision of and automated switch between two competing models ("champion" vs "challenger")
+  - Frontend:
+    - image upload and inferrence (pneumonia indication)
+    - visualization of ML models' performance
+    - embedded API documentation and model administration panel
