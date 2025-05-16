@@ -30,3 +30,6 @@ Main functionalities:
     - image upload and inferrence (pneumonia indication)
     - visualization of ML models' performance
     - embedded API documentation and model administration panel
+
+![Achitecture   Workflows](https://github.com/user-attachments/assets/39e11f47-337b-4149-84dc-6315e4279f73)
+
