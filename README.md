@@ -32,8 +32,7 @@ Main functionalities:
     - embedded API documentation and model administration panel
 
 <p align="left">
-  <strong>![image](https://github.com/user-attachments/assets/f34c0818-a155-4fe7-a940-b75e011ea234)
- Workflow documentation</strong>  
+  <strong> 🤖 Workflow documentation</strong>  
 </p>
 ![Achitecture   Workflows](https://github.com/user-attachments/assets/39e11f47-337b-4149-84dc-6315e4279f73)
 
