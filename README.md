@@ -55,9 +55,9 @@ Locally prepare Git:
    - Specify this Github repository here as the remote origin
    - Pull content of this repo to your local one (git pull origin main)
 
-Build docker image from local repo to start app locally:
-   - From project directory run:
-   -- docker build -f docker/Dockerfile.fullstack -t xray_pneumonia .
-   -- docker run -d --name xray_container -p 8000:8000 -p 8080:8080 -p 3000:3000 xray_pneumonia
+Build docker image from local repo (project directory), by running the following command from project directory:
+   - docker build -f docker/Dockerfile.fullstack -t xray_pneumonia .
+Then build and run docker container, by running the following command from project directory:
+   - docker run -d --name xray_container -p 8000:8000 -p 8080:8080 -p 3000:3000 xray_pneumonia
 
 
