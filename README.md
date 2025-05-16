@@ -7,12 +7,12 @@ Currently worked on by Patrick and Andrei.
 
 ### 🧠 Fullstack Project Highlights
 
-- **Fullstack project integration**: Tensorflow models, backend business logic, FastAPI, and React frontend
+- **Fullstack project integration of various topics/components**: Tensorflow models, backend business logic, FastAPI, MLFlow training and performance tracking, React frontend, shadow deployment
 
 --- 
 
-<p align="center">
-  <strong>🚀 Project and workflow documentation: <em>SEE BELOW</em>!</strong>  
+<p align="left">
+  <strong>🚀 Quick Project and Workflow documentation</strong>  
 </p>
 <p align="center">
   <strong><a href="https://youtu.be/aaeOJk1loig">📺 Watch short demo video on YouTube</a></strong>
