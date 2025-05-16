@@ -18,6 +18,7 @@ Currently worked on by Patrick and Andrei.
 <p align="left">
   <strong>🚀 Quick Project documentation</strong>  
 </p>
+
 Main functionalities:
   - Training (backend):
     - model training: own CNN model, transfer learning (MobileNet), fine tuning (MobileNet)
@@ -34,5 +35,6 @@ Main functionalities:
 <p align="left">
   <strong> 🤖 Workflow documentation</strong>  
 </p>
+
 ![Achitecture   Workflows](https://github.com/user-attachments/assets/39e11f47-337b-4149-84dc-6315e4279f73)
 
